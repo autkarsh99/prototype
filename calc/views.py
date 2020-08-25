@@ -28,6 +28,7 @@ def add(request):
 @csrf_exempt
 def ranger(request):
     resp = json.loads(request.body)
+    user_id = str(resp["message"]["chat"]["id"])
     message = resp["message"]["text"].split()
     # Break message by space, if [0] == "/sum" sum = [1]+[2]
     if message[0] == "/sum":
@@ -104,5 +105,5 @@ def ranger(request):
     else:
         response = "Hi, I don't know this command"
     
-    urllib.request.urlopen("https://api.telegram.org/bot1256419034:AAFCS-K4_JFxHhqnitL-QrdxNQzy32K3fsg/sendMessage?chat_id=967409586&text="+urllib.parse.quote(str(response)))
+    urllib.request.urlopen("https://api.telegram.org/bot1256419034:AAFCS-K4_JFxHhqnitL-QrdxNQzy32K3fsg/sendMessage?chat_id="+user_id+"&text="+urllib.parse.quote(str(response)))
     return HttpResponse('Success')
