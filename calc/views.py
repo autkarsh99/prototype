@@ -39,6 +39,13 @@ def ranger(request):
     
     elif message[0] == "/multi":
         response = int(message[1]) * int(message[2])
+    elif message[0] == "/palin":
+        l=message[1]
+        r=l[::-1]
+        if l==r:
+            response = "Word is Palindrome"
+        else:
+            response = "Word is not Palindrome"
 
     elif message[0] == "/fact":
         factorial = 1
