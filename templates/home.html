@@ -1,10 +1,33 @@
-{% extends 'base.html' %}
-
 {% block content %}
-<h1>Hello {{name}}!!</h1>
-<form action="add">
-    Enter 1st Number :<input type="text" name="num1"><br>
-    Enter 2nd Number :<input type="text" name="num2"><br>
-    <input type="submit">
-</form>
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Bot UI</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="chat-output" id="chat-output">
+  <div class="user-message">
+    <div class="message">Hi! I'm a bot. What's up?</div>
+  </div>
+</div>
+
+<div class="chat-input">
+  <form action="#0" id="user-input-form">
+    <input type="text" id="user-input" class="user-input" placeholder="Talk to the bot.">
+  </form>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+  <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
+
 {% endblock %}

@@ -1,4 +1,10 @@
 from django.db import models
 
-class Sample(models.Model):
-    U_Response = models.CharField(max_length=10)
+class employee(models.Model):
+    name=models.CharField(max_length=20)
+    #address=models.CharField(max_length=100)
+    #salary=models.IntegerField()
+    #status=models.BooleanField()
+    mobile=models.CharField(max_length=10)
+    email=models.EmailField()
+
