@@ -14,6 +14,7 @@ import string
 from .models import employee
 import requests
 import randfacts
+import smtplib
 
 dictionary=PyDictionary()
 '''import random
@@ -21,6 +22,13 @@ from models import Joke
 from controllers.utils import send_message'''
 
 # Create your views here.
+def sendEmail(to, content):
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.login('addrel99@gmail.com', 'Dhananjay@123')
+    server.sendmail('addrel99@gmail.com', to, content)
+    server.close()
 def home(request):
     return render(request,'home.html',{'name':'Kiran'});
 def signup(request):
@@ -125,7 +133,9 @@ def chatbot(message):
         response="Meaning: "+ str(dictionary.meaning(message[1]))+"<br><br>"+"Synonyms: "+str(dictionary.synonym(message[1]))+"<br><br>"+"Antonyms: "+str(dictionary.antonym(message[1]))
 
     elif message[0]=="/translate":
-        response="Your Translation: "+ str(dictionary.translate(message[1],"en"))
+        tmessage=original_message.replace('/translate','').splitlines()
+        omessage=tmessage[1]
+        response="Your Translation: "+ str(dictionary.translate(omessage,"en"))
 
     elif message[0]=="/wiki":
         #c=message[1].lower()
@@ -193,6 +203,16 @@ def chatbot(message):
             else:
                 response = "No contact found"
 
+    elif message[0]=="/sendmail":
+        try:
+            email_detail=original_message.replace('/sendmail','').splitlines()
+            to=email_detail[1]
+            content= email_detail[2]
+            sendEmail(to, content)
+        except Exception as e:
+            print(e)
+            response="Not able to send email Sorry!"
+
     elif message[0]=="/help":
         response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in English language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"+"<br>"+"/gen: to generate random password"
 
@@ -218,8 +238,6 @@ def chatbot(message):
     elif message[0]=="/facts":
         x= randfacts.getFact()
         response = str(x)
-
-
 
     elif message[0]=="/prime":
         try:
