@@ -194,7 +194,7 @@ def chatbot(message):
                 response = "No contact found"
 
     elif message[0]=="/help":
-        response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in English language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"
+        response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in English language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"+"<br>"+"/gen: to generate random password"
 
     elif message[0] == "/weather":
         api_key = "ac9ae5f24855de6ba928d40fc22af036"
