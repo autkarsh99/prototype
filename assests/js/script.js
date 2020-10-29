@@ -14,16 +14,6 @@ $("#user-input-form").on("submit", function (e) {
     </div>
   `);
 
-  // setTimeout(function () {
-  //   outputArea.append(`
-  //     <div class='user-message'>
-  //       <div class='message'>
-  //         I'm like 20 lines of JavaScript I can't actually talk to you.
-  //       </div>
-  //     </div>
-  //   `);
-  // }, 250);
-
   let url = "sendBotMessage"
   $.ajax({
     url: url,
@@ -31,8 +21,8 @@ $("#user-input-form").on("submit", function (e) {
       message: message
     },
     success: (resp) => {
-      console.log(resp)
-    },
+        outputArea.append("<div class = 'user-message'><div class = 'message'>"+resp+"</div></div>")
+      },
     error: () => {
       alert("Something went wrong...")
     }

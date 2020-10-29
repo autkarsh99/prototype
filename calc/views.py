@@ -122,7 +122,7 @@ def chatbot(message):
         else:
             response="Word in not Palindrome!"
     elif message[0]=="/dict":
-        response="Meaning: "+ str(dictionary.meaning(message[1]))+"\n"+"Synonyms: "+str(dictionary.synonym(message[1]))+"\n"+"Antonyms: "+str(dictionary.antonym(message[1]))
+        response="Meaning: "+ str(dictionary.meaning(message[1]))+"<br><br>"+"Synonyms: "+str(dictionary.synonym(message[1]))+"<br><br>"+"Antonyms: "+str(dictionary.antonym(message[1]))
 
     elif message[0]=="/translate":
         response="Your Translation: "+ str(dictionary.translate(message[1],"en"))
@@ -175,7 +175,7 @@ def chatbot(message):
             response = "Contact added!"
         except:
             response = "Please send details in correct format as below:"
-            response += "\n/addcontact\nName\nPhone\nEmail"
+            response += "<br>/addcontact<br>Name<br>Phone<br>Email"
 
 
     elif message[0] == "/searchcontact":
@@ -185,16 +185,16 @@ def chatbot(message):
             Q(email__icontains=srch))
 
             if match:
-                response = "I got following results - \n\n"
+                response = "I got following results - <br><br>"
                 for each_match in match:
-                    response += each_match.name + "\n"
-                    response += each_match.mobile + "\n"
-                    response += each_match.email + "\n\n"
+                    response += each_match.name + "<br>"
+                    response += each_match.mobile + "<br>"
+                    response += each_match.email + "<br><br>"
             else:
                 response = "No contact found"
 
     elif message[0]=="/help":
-        response = "Here the things I can do + \n + /dict: s"
+        response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in English language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"
 
     elif message[0] == "/weather":
         api_key = "ac9ae5f24855de6ba928d40fc22af036"
@@ -211,7 +211,7 @@ def chatbot(message):
             z = x["weather"]
             weather_description = z[0]["description"]
             current_tempc = float(current_temperature) - 273.15 
-            response = "Temperature (in Celcius) = "+str(current_tempc)+"\n Atmospheric Pressure (in hPa unit) = "+str(current_pressure)+"\n humidity (in percent) = "+str(current_humidity)+"\n Description = "+str(weather_description)
+            response = "Temperature (in Celcius) = "+str(current_tempc)+"<br> Atmospheric Pressure (in hPa unit) = "+str(current_pressure)+"<br> Humidity (in percent) = "+str(current_humidity)+"<br> Description = "+str(weather_description)
         else:
             response = "City Not Found"
 

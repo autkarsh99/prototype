@@ -21,8 +21,8 @@ $("#user-input-form").on("submit", function (e) {
       message: message
     },
     success: (resp) => {
-      outputArea.append(resp)
-    },
+        outputArea.append("<div class = 'user-message'><div class = 'message'>"+resp+"</div></div>")
+      },
     error: () => {
       alert("Something went wrong...")
     }
