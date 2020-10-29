@@ -17,6 +17,7 @@ $("#user-input-form").on("submit", function (e) {
   let url = "sendBotMessage"
   $.ajax({
     url: url,
+    type: "POST",
     data: {
       message: message
     },

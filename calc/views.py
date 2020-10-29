@@ -80,7 +80,7 @@ def ranger(request):
 
 @csrf_exempt
 def sendBotMessage(request):
-    response = chatbot(request.GET['message'])
+    response = chatbot(request.POST['message'])
     return HttpResponse(response)
 
 
@@ -133,9 +133,12 @@ def chatbot(message):
         response="Meaning: "+ str(dictionary.meaning(message[1]))+"<br><br>"+"Synonyms: "+str(dictionary.synonym(message[1]))+"<br><br>"+"Antonyms: "+str(dictionary.antonym(message[1]))
 
     elif message[0]=="/translate":
-        tmessage=original_message.replace('/translate','').splitlines()
-        omessage=tmessage[1]
-        response="Your Translation: "+ str(dictionary.translate(omessage,"en"))
+        try:
+            tmessage=original_message.replace('/translate','').splitlines()
+            omessage=tmessage[1]
+            response="Your Translation: "+ str(dictionary.translate(omessage,"en"))
+        except:
+            response="Failed to translate"
 
     elif message[0]=="/wiki":
         #c=message[1].lower()
