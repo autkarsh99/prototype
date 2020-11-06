@@ -15,6 +15,7 @@ from .models import employee
 import requests
 import randfacts
 import smtplib
+from translate import Translator
 
 dictionary=PyDictionary()
 '''import random
@@ -136,7 +137,9 @@ def chatbot(message):
         try:
             tmessage=original_message.replace('/translate','').splitlines()
             omessage=tmessage[1]
-            response="Your Translation: "+ str(dictionary.translate(omessage,"en"))
+            translator= Translator(to_lang="hi")
+            translation = translator.translate(omessage)
+            response="Your Translation: "+ str(translation)
         except:
             response="Failed to translate"
 
@@ -212,12 +215,13 @@ def chatbot(message):
             to=email_detail[1]
             content= email_detail[2]
             sendEmail(to, content)
+            response = "Mail sent"
         except Exception as e:
             print(e)
             response="Not able to send email Sorry!"
 
     elif message[0]=="/help":
-        response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in English language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"+"<br>"+"/gen: to generate random password"
+        response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in Hindi language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"+"<br>"+"/gen: to generate random password"+"<br>"+"/sendmail: Used to send message through mail"+"<br>"+"/time: it can also show current time"
 
     elif message[0] == "/weather":
         api_key = "ac9ae5f24855de6ba928d40fc22af036"
@@ -259,7 +263,7 @@ def chatbot(message):
             response = "Please enter correct format" # don't run next condition
 
     elif message[0].lower() == "hi" or message[0].lower() == "hello" or message[0].lower() == "hey":
-        response = "Hello there! I'm Anjan's bot, type / to see list of commands :)"
+        response = "Hello there! I'm Anjan's bot, type /help to see list of commands :)"
     else:
         response = "Hi, I don't know this command"
 
