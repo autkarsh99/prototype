@@ -91,7 +91,13 @@ def chatbot(message):
     message = original_message.split()
     # Break message by space, if [0] == "/sum" sum = [1]+[2]
     if message[0] == "/sum":
-        response = int(message[1]) + int(message[2])
+        numbers=original_message.replace('/sum','').split()
+        s=0
+        for x in numbers:
+            c=int(x)
+            s+=c
+        j=' '.join(numbers)
+        response="Sum of Given Number "+str(s)
 
     elif message[0] == "/diff":
         response = int(message[2]) - int(message[1])
