@@ -16,6 +16,7 @@ import requests
 import randfacts
 import smtplib
 from translate import Translator
+from . import Weather
 
 dictionary=PyDictionary()
 '''import random
@@ -154,20 +155,17 @@ def chatbot(message):
         message.pop(0)
         message="".join(message)
         response=str(wikipedia.summary(message, sentences=5))
+
     elif message[0]=="/search":
         message.pop(0)
         message="".join(message)
-        '''def search(message,tld='com',lang='en',num=10,start=0,stop=None,pause=2.0):
-            try:
-                from googleseach import search
-            except ImportError:
-                response = "No module named 'google' found"'''
         response = ""
-        for j in gsearch(message, tld="co.in", num=10, stop=10, pause=2):
-            response=str(response)+str(j)+str("\n")
+        for j in gsearch(message):
+        	response=str(response)+str(j)+str("\n")
+
     elif message[0]=="/jokes":
-        url=urllib.request.urlopen("https://official-joke-api.appspot.com/jokes/random")
-        response=url.read().decode()
+    	url=urllib.request.urlopen("https://official-joke-api.appspot.com/jokes/random")
+    	response=url.read().decode()
     elif message[0]=="/gen":
         message="".join(message)
         n=message[0]
@@ -209,9 +207,9 @@ def chatbot(message):
             if match:
                 response = "I got following results - <br><br>"
                 for each_match in match:
-                    response += each_match.name + "<br>"
-                    response += each_match.mobile + "<br>"
-                    response += each_match.email + "<br><br>"
+                    response += "Name: " +each_match.name + "<br>"
+                    response += "Mobile: "+each_match.mobile + "<br>"
+                    response += "Email: "+each_match.email + "<br><br>"
             else:
                 response = "No contact found"
 
@@ -227,10 +225,11 @@ def chatbot(message):
             response="Not able to send email Sorry!"
 
     elif message[0]=="/help":
-        response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in Hindi language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"+"<br>"+"/gen: to generate random password"+"<br>"+"/sendmail: Used to send message through mail"+"<br>"+"/time: it can also show current time"
+        response = "Here the things I can do" +"<br>"+ "/dict <word>: to find any word meaning with antonyms and Synonyms "+"<br>"+"/translate: to translate any sentence in Hindi language"+"<br>"+"/wiki <word>: to find any information on Wikipedia"+"<br>"+"/search <word>: to find any information on google.com"+"<br>"+"/addcontact: to add any contact detail on server"+"<br>"+"Here is the format to add Contact in a proper way:"+"<br>"+"/addcontact"+"<br>"+"[Name]"+"<br>"+"[Mobile Number]"+"<br>"+"[Email]"+"<br>"+"/searchcontact: to search any contact detail on server"+"<br>"+"Here is the format to search contact on the server"+"<br>"+"/searchcontact [Name]"+"<br>"+"/jokes: to get any randrom jokes"+"<br>"+"/facts: to get interesting random facts"+"<br>"+"/weather <City Name>: To get any details of Weather of any city"+"<br>"+"/gen: to generate random password"+"<br>"+"/sendmail: Used to send message through mail"+"<br>"+"Send Email in the following:<br>"+"/sendmail<br>"+"[Email Address]"+"<br>"+"[Content/Message]"+"<br>"+"/time: it can also show current time"
 
     elif message[0] == "/weather":
-        api_key = "ac9ae5f24855de6ba928d40fc22af036"
+    	response = Weather.weather(message[1])
+    	'''api_key = "ac9ae5f24855de6ba928d40fc22af036"
         base_url = "http://api.openweathermap.org/data/2.5/weather?"
         city_name = message[1].capitalize()
         complete_url = base_url + "appid=" + api_key + "&q=" + city_name
@@ -246,7 +245,7 @@ def chatbot(message):
             current_tempc = float(current_temperature) - 273.15 
             response = "Temperature (in Celcius) = "+str(current_tempc)+"<br> Atmospheric Pressure (in hPa unit) = "+str(current_pressure)+"<br> Humidity (in percent) = "+str(current_humidity)+"<br> Description = "+str(weather_description)
         else:
-            response = "City Not Found"
+            response = "City Not Found"'''
 
     elif message[0]=="/facts":
         x= randfacts.getFact()
